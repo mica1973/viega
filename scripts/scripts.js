@@ -10,7 +10,15 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  decorateBlock,
 } from './aem.js';
+
+const VIEGA_HOMEPAGE_PATHS = new Set(['/', '/index', '/index.html', '/de/homepage', '/de/homepage.html']);
+const VIEGA_WORLD_VIDEO = {
+  url: 'https://www.youtube.com/watch?v=POKOn8Fpj9A',
+  title: 'Viega World: Das neue Herz unserer Marke!',
+  poster: '/media/viega-world-video-poster.jpg',
+};
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -74,6 +82,125 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Map Viega's authored first-section teaser cards to the homepage hero carousel.
+ * The DA source currently expresses these four slides as a Cards block.
+ * @param {Element} main The container element
+ */
+function buildViegaHomepageCarousel(main) {
+  if (!VIEGA_HOMEPAGE_PATHS.has(window.location.pathname)) return;
+
+  const heroSection = main.firstElementChild;
+  const title = heroSection?.querySelector('h1')?.textContent.trim();
+  if (title !== 'Viega Deutschland') return;
+
+  const heroCards = heroSection.querySelector('.cards');
+  if (!heroCards) return;
+
+  const rows = [...heroCards.children].filter((row) => row.tagName === 'DIV');
+  const isHeroCards = rows.length === 4 && rows.every((row) => (
+    row.querySelector('picture, img')
+    && row.querySelector('h2, h3')
+    && row.querySelector('a[href]')
+  ));
+  if (!isHeroCards) return;
+
+  const pageHeading = heroSection.querySelector('h1');
+  const firstSlideHeading = rows[0].querySelector('h2, h3');
+  if (pageHeading && firstSlideHeading) {
+    const heroHeading = document.createElement('h1');
+    heroHeading.id = firstSlideHeading.id || pageHeading.id;
+    while (firstSlideHeading.firstChild) heroHeading.append(firstSlideHeading.firstChild);
+    firstSlideHeading.replaceWith(heroHeading);
+
+    const titleWrapper = pageHeading.parentElement;
+    pageHeading.remove();
+    const isEmptyTitleWrapper = titleWrapper !== heroSection
+      && !titleWrapper.children.length
+      && !titleWrapper.textContent.trim();
+    if (isEmptyTitleWrapper) titleWrapper.remove();
+  }
+
+  rows.forEach((row, index) => {
+    const image = row.querySelector('img');
+    if (image) image.loading = index === 0 ? 'eager' : 'lazy';
+  });
+
+  heroCards.classList.remove('cards');
+  heroCards.classList.add('carousel');
+}
+
+/**
+ * Rebuilds the homepage Viega World section around its authored teaser and source video.
+ * The public homepage renders the video dynamically, so the source .plain.html has no video block.
+ * @param {Element} main The main container element
+ */
+function buildViegaHomepageWorld(main) {
+  if (!VIEGA_HOMEPAGE_PATHS.has(window.location.pathname)) return;
+
+  const heading = [...main.querySelectorAll('h2')].find((item) => (
+    item.textContent.trim() === 'Das Herz unserer Marke: die Viega World!'
+  ));
+  const section = heading?.parentElement;
+  const columns = section?.querySelector(':scope > .columns');
+  const row = columns?.firstElementChild;
+  const intro = [...(section?.children || [])].find((child) => (
+    child.tagName === 'P' && child.textContent.trim().startsWith('Mit der Viega World')
+  ));
+  if (!heading || !row || row.children.length !== 2 || columns.classList.contains('viega-world-layout')) return;
+
+  const [imageColumn, teaserContent] = [...row.children];
+  if (!imageColumn.querySelector('picture') || !teaserContent.querySelector('a[href]')) return;
+
+  const teaser = document.createElement('div');
+  teaser.className = 'columns-world-teaser';
+  const teaserLink = teaserContent.querySelector('a[href]');
+  if (!teaserLink) return;
+  const teaserDestination = teaserLink.getAttribute('href');
+  const teaserLinkParagraph = teaserLink.closest('p');
+  if (
+    teaserLinkParagraph
+    && teaserLinkParagraph.textContent.trim() === teaserLink.textContent.trim()
+  ) {
+    teaserLinkParagraph.remove();
+  }
+  teaserContent.classList.add('columns-world-teaser-content');
+
+  const teaserCardLink = document.createElement('a');
+  teaserCardLink.className = 'columns-world-teaser-link';
+  teaserCardLink.href = teaserDestination;
+  teaserCardLink.append(imageColumn, teaserContent);
+  teaser.append(teaserCardLink);
+
+  const copy = document.createElement('div');
+  copy.className = 'columns-world-copy';
+  if (intro) copy.append(intro);
+  copy.append(teaser);
+
+  const videoLink = document.createElement('a');
+  videoLink.href = VIEGA_WORLD_VIDEO.url;
+  videoLink.textContent = VIEGA_WORLD_VIDEO.title;
+
+  const poster = document.createElement('picture');
+  const posterImage = document.createElement('img');
+  posterImage.src = VIEGA_WORLD_VIDEO.poster;
+  posterImage.alt = '';
+  posterImage.width = 320;
+  posterImage.height = 180;
+  posterImage.loading = 'lazy';
+  posterImage.decoding = 'async';
+  poster.append(posterImage);
+
+  const video = buildBlock('video', { elems: [videoLink, poster] });
+  const videoColumn = document.createElement('div');
+  videoColumn.className = 'columns-world-video';
+  videoColumn.append(video);
+
+  row.replaceChildren(copy, videoColumn);
+  decorateBlock(video);
+  columns.classList.add('viega-world-layout');
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -96,6 +223,8 @@ function buildAutoBlocks(main) {
         });
       });
     }
+    buildViegaHomepageCarousel(main);
+    buildViegaHomepageWorld(main);
     buildWidgetAutoBlocks(main);
   } catch (error) {
     // eslint-disable-next-line no-console
