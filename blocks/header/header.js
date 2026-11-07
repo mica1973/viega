@@ -90,40 +90,71 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   }
 }
 
+const VIEGA_ORIGIN = 'https://www.viega.de';
+
 const NAV_UTILITY_LINKS = [
-  { label: 'Merkliste', href: '/de/Merkliste.html', icon: 'bookmark' },
-  { label: 'Karriere', href: '/de/unternehmen/Jobs.html', icon: 'career' },
-  { label: 'Ersatzteile', href: '/de/produkte/Ersatzteile.html', icon: 'parts' },
+  {
+    label: 'Merkliste',
+    href: `${VIEGA_ORIGIN}/de/Merkliste.html`,
+    icon: 'watchlist',
+    count: 0,
+  },
+  {
+    label: 'Karriere',
+    href: `${VIEGA_ORIGIN}/de/unternehmen/Jobs.html`,
+    icon: 'handshake',
+  },
+  {
+    label: 'Ersatzteile',
+    href: `${VIEGA_ORIGIN}/de/produkte/Ersatzteile.html`,
+    icon: 'spareparts',
+  },
   {
     label: 'KATALOG',
-    href: '/de/produkte/Katalog.html',
+    href: `${VIEGA_ORIGIN}/de/produkte/Katalog.html`,
     icon: 'catalog',
     primary: true,
   },
 ];
 
+// Viega's header symbols, redrawn inline so they remain same-origin in EDS preview.
 const NAV_UTILITY_ICON_PATHS = {
-  bookmark: 'M6 3.5h12v17l-6-4-6 4z',
-  career: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21a8 8 0 0 1 16 0',
-  parts: 'M14.5 6.5a4 4 0 0 0-5.2 5.2L3.5 17.5l3 3 5.8-5.8a4 4 0 0 0 5.2-5.2l-2.4 2.4-3-3z',
-  catalog: 'M4 4.5c3.1-.8 5.8-.4 8 1.2v14c-2.2-1.6-4.9-2-8-1.2zM20 4.5c-3.1-.8-5.8-.4-8 1.2v14c2.2-1.6 4.9-2 8-1.2z',
+  watchlist: [
+    'M11.2 44.6V1m27.7 29v14.6H6.6V1h32.3v29.1',
+    'M20.5 1v9.9l-2.6-2.4-2.6 2.4V1',
+  ],
+  handshake: [
+    'M25.4 20.2c3.8 3.8 7.1 7.2 7.6 7.9 2.7 3.1-.8 5.8-3.3 3.3-.2-.2-3.5-3.7-5.3-5.4l5.7 5.7c2.8 3-.8 5.8-3.3 3.3-.2-.2-4.3-4.4-6-6l5 5c2.8 3-.8 5.8-3.3 3.3-.2-.2-4-4.1-5.5-5.7l2.9 2.9c2.1 2.9-1.2 5.3-3.7 3C15.6 37 4.7 26.2 3 24.2c-.2-.2-.8-.8-1.7-1.6M2.6 7.8C4.5 9.9 7.5 13 8.9 13h7.6m18.2 12.9c.4-.2.8-.4 1-.6.7-.4 8.3-5.3 8.9-5.7',
+    'M43.6 7.8S33.5 14.2 33 14.2c-1.4-.1-5.5-1.3-7.3-1.8-1.8-.4-2.1-.4-3.8.2-.7.2-2.9 1.1-4.1 2.8-1.2 1.8-5.3 7.9-5.3 7.9-.8 1.2-.1 2.9 1.3 3 .6 0 1.1 0 1.9-.3.4-.2.9-.6 1.1-.9l3.1-4.5c1.7-2.2 3.2-2.5 4.5-2.7',
+  ],
+  spareparts: [
+    'M14.61 34.88c1.43 3.7-.41 7.86-4.11 9.29-1.42.55-2.99.63-4.46.23l-.69-.68 5.53-1.85 1.4-4.81-3.98-3.98-4.75 1.45-1.91 5.49-.74-.94a7.174 7.174 0 015.38-8.62c1.42-.33 2.9-.22 4.25.31l20.18-20.22c-1.43-3.7.41-7.86 4.11-9.29 1.42-.55 2.99-.63 4.46-.23l.69.68-5.53 1.85-1.4 4.8 3.98 3.98 4.76-1.46 1.9-5.48.74.94a7.19 7.19 0 01-9.63 8.32L14.62 34.89z',
+  ],
+  catalog: [
+    'M15.4 41.6H38c.6 0 1.1-.5 1.1-1.1V5.8c0-.6-.5-1.1-1.1-1.1H13.9V40c-.1.9.6 1.6 1.5 1.6',
+    'M10 44.6c-2.1 0-3.7-1.7-3.7-3.7V4.5c0-1 .4-2 1.1-2.6C8.1 1.2 9 .8 10 .8c2.1 0 3.9 1.7 3.9 3.7v.2',
+    'M13.9 39.8c0-2.1-1.8-3.5-3.8-3.5h0C8 36.3 6.3 38 6.3 40m3.7 4.6h22.7c.6 0 1.1-.5 1.1-1.1v-.1m-13.3-35h12.3M19 28.1h14.8m-6.7 4.7h6.7m-6.7 4.1h6.7m-16.4-4.8h6.9v5.6h-6.9zm0-20h18.5v11.7H17.4zm.7.5l17.2 10.8m.6-11.3L17.4 23.7',
+  ],
 };
 
 function createUtilityIcon(name) {
   const namespace = 'http://www.w3.org/2000/svg';
   const icon = document.createElementNS(namespace, 'svg');
-  icon.setAttribute('viewBox', '0 0 24 24');
+  icon.setAttribute('viewBox', '0 0 45.3 45.3');
+  icon.classList.add('nav-utility-icon-svg');
   icon.setAttribute('aria-hidden', 'true');
   icon.setAttribute('focusable', 'false');
 
-  const path = document.createElementNS(namespace, 'path');
-  path.setAttribute('d', NAV_UTILITY_ICON_PATHS[name]);
-  path.setAttribute('fill', 'none');
-  path.setAttribute('stroke', 'currentColor');
-  path.setAttribute('stroke-width', '1.6');
-  path.setAttribute('stroke-linecap', 'round');
-  path.setAttribute('stroke-linejoin', 'round');
-  icon.append(path);
+  NAV_UTILITY_ICON_PATHS[name].forEach((definition) => {
+    const path = document.createElementNS(namespace, 'path');
+    path.setAttribute('d', definition);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('stroke-width', '1.5');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-linejoin', 'round');
+    icon.append(path);
+  });
   return icon;
 }
 
@@ -136,6 +167,7 @@ function createUtilityNav() {
     href,
     icon,
     primary,
+    count,
   }) => {
     const item = document.createElement('li');
     if (primary) item.className = 'nav-utility-catalog';
@@ -143,7 +175,19 @@ function createUtilityNav() {
     const link = document.createElement('a');
     link.className = 'nav-utility-link';
     link.href = href;
-    link.append(createUtilityIcon(icon));
+    if (typeof count === 'number') link.setAttribute('aria-label', `${label}, ${count} Elemente`);
+
+    const iconWrap = document.createElement('span');
+    iconWrap.className = `nav-utility-icon-wrap nav-utility-icon-wrap--${icon}`;
+    iconWrap.append(createUtilityIcon(icon));
+    if (typeof count === 'number') {
+      const counter = document.createElement('span');
+      counter.className = 'nav-utility-counter';
+      counter.textContent = `${count}`;
+      counter.setAttribute('aria-hidden', 'true');
+      iconWrap.append(counter);
+    }
+    link.append(iconWrap);
 
     const text = document.createElement('span');
     text.className = 'nav-utility-label';
@@ -195,6 +239,7 @@ export default async function decorate(block) {
       if (!subList) return;
 
       navSection.classList.add('nav-drop');
+      subList.classList.add('nav-mega-menu');
       const labelContainer = navSection.querySelector(':scope > p');
       const labelLink = labelContainer?.querySelector(':scope > a');
       const label = labelLink?.textContent.trim() || labelContainer?.textContent.trim() || `Menü ${index + 1}`;
@@ -217,14 +262,42 @@ export default async function decorate(block) {
         navSection.prepend(toggle);
       }
 
-      toggle.addEventListener('click', () => {
+      toggle.addEventListener('click', (event) => {
         const shouldExpand = toggle.getAttribute('aria-expanded') !== 'true';
+        // A pointer click causes pointerenter first; don't immediately undo the hover-open state.
+        if (isDesktop.matches && !shouldExpand && event.detail > 0 && navSection.matches(':hover')) return;
         if (isDesktop.matches) {
           toggleAllNavSections(navSections);
           toggle.focus();
         }
         toggle.setAttribute('aria-expanded', `${shouldExpand}`);
         toggle.setAttribute('aria-label', `${label} Untermenü ${shouldExpand ? 'schließen' : 'öffnen'}`);
+      });
+
+      navSection.addEventListener('pointerenter', () => {
+        if (!isDesktop.matches) return;
+        toggleAllNavSections(navSections);
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', `${label} Untermenü schließen`);
+      });
+
+      navSection.addEventListener('pointerleave', () => {
+        if (!isDesktop.matches || navSection.contains(document.activeElement)) return;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', `${label} Untermenü öffnen`);
+      });
+
+      navSection.addEventListener('focusin', () => {
+        if (!isDesktop.matches) return;
+        toggleAllNavSections(navSections);
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', `${label} Untermenü schließen`);
+      });
+
+      navSection.addEventListener('focusout', (event) => {
+        if (!isDesktop.matches || navSection.contains(event.relatedTarget)) return;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', `${label} Untermenü öffnen`);
       });
     });
   }

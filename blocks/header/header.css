@@ -34,6 +34,7 @@ header nav[aria-expanded='true'] {
   grid-template:
     'brand hamburger' var(--nav-height)
     'tools tools' var(--nav-tools-height)
+    'utilities utilities' auto
     'sections sections' minmax(0, 1fr) / minmax(0, 1fr) auto;
   height: 100dvh;
   width: 100%;
@@ -251,12 +252,23 @@ header nav .nav-sections .nav-drop > ul > li > ul > li > p {
   font-weight: 700;
 }
 
-header nav .nav-sections .nav-drop > .nav-drop-toggle[aria-expanded='true'] + ul {
-  display: block;
-}
-
 header nav .nav-sections .nav-drop > ul li {
   border: 0;
+}
+
+header nav .nav-sections .nav-drop > ul > li > ul {
+  margin: 0;
+  padding: 0 0 12px 16px;
+  list-style: none;
+}
+
+header nav .nav-sections .nav-drop > ul > li > ul > li {
+  margin: 0;
+  padding: 0;
+}
+
+header nav .nav-sections .nav-drop > .nav-drop-toggle[aria-expanded='true'] + ul {
+  display: block;
 }
 
 header nav .nav-sections .nav-drop > ul a:any-link {
@@ -271,6 +283,82 @@ header nav .nav-sections .nav-drop > ul a:any-link {
 
 header nav .nav-utilities {
   display: none;
+}
+
+header nav .nav-utility-icon-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+header nav .nav-utility-icon-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+header nav .nav-utility-counter {
+  position: absolute;
+  top: -4px;
+  right: -5px;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  padding: 0 2px;
+  background: var(--accent-color);
+  color: var(--text-color);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+header nav[aria-expanded='true'] .nav-utilities {
+  grid-area: utilities;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin: 0;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+  padding: 8px 16px;
+  list-style: none;
+}
+
+header nav[aria-expanded='true'] .nav-utilities .nav-utility-link:any-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  min-height: 56px;
+  padding: 4px;
+  color: #d7d7d7;
+  font-size: var(--body-font-size-xs);
+  text-align: center;
+  text-decoration: none;
+}
+
+header nav[aria-expanded='true'] .nav-utilities .nav-utility-link:hover,
+header nav[aria-expanded='true'] .nav-utilities .nav-utility-link:focus-visible {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+header nav[aria-expanded='true'] .nav-utility-catalog .nav-utility-link:any-link {
+  flex-direction: row;
+  gap: 6px;
+  border-radius: 4px;
+  padding: 8px;
+  background: var(--accent-color);
+  color: var(--text-color);
+  font-size: 11px;
+  font-weight: 700;
 }
 
 /* Search row */
@@ -357,7 +445,7 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   header nav .nav-brand img {
     width: 90px;
     max-height: var(--nav-height);
-    transform: translateY(18px);
+    transform: translateY(15px);
   }
 
   header nav .nav-sections,
@@ -377,7 +465,7 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
     align-items: stretch;
-    gap: clamp(18px, 2.5vw, 40px);
+    gap: clamp(32px, 4vw, 44px);
     height: 100%;
   }
 
@@ -389,7 +477,7 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
-    position: relative;
+    position: static;
     display: flex;
     grid-template-columns: none;
     align-items: center;
@@ -405,48 +493,105 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   }
 
   header nav .nav-sections .nav-drop-toggle {
-    min-width: 32px;
+    width: 1px;
+    min-width: 1px;
     min-height: 44px;
   }
 
   header nav .nav-sections .nav-drop-indicator {
     grid-column: auto;
     grid-row: auto;
+    margin-left: -1px;
+  }
+
+  /* Viega's desktop header has plain section labels; the submenu opens on hover/focus. */
+  header nav .nav-sections .nav-drop-toggle::after {
+    display: none;
+  }
+
+  header nav .nav-sections .nav-drop:hover > p > a,
+  header nav .nav-sections .nav-drop:focus-within > p > a {
+    color: var(--accent-color);
+    text-decoration: none;
   }
 
   header nav .nav-sections .nav-drop > ul {
     position: absolute;
-    top: calc(100% - 4px);
-    left: -12px;
+    top: var(--nav-height);
+    left: 0;
     z-index: 5;
-    width: min(26rem, calc(100vw - 2rem));
+    display: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px 32px;
+    width: 100%;
     max-height: min(70vh, 38rem);
     overflow-y: auto;
     border-top: 3px solid var(--accent-color);
-    padding: 12px 20px 18px;
+    padding: 24px max(24px, calc(50vw - 700px)) 32px;
     background-color: var(--background-color);
-    box-shadow: 0 10px 24px rgb(0 0 0 / 20%);
+    box-shadow: 0 12px 28px rgb(0 0 0 / 20%);
     color: var(--text-color);
   }
 
   header nav .nav-sections .nav-drop > ul > li {
     display: block;
-    border-bottom: 1px solid var(--light-color);
+    align-self: start;
+    border-bottom: 0;
+    padding: 6px 0;
+  }
+
+  header nav .nav-sections .nav-drop > ul > li > p {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  header nav .nav-sections .nav-drop > ul > li > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 2px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  header nav .nav-sections .nav-drop > ul > li > ul > li {
+    border: 0;
     padding: 0;
   }
 
   header nav .nav-sections .nav-drop > ul a:any-link {
-    min-height: 40px;
+    min-height: 36px;
     color: var(--text-color);
+    font-size: var(--body-font-size-s);
+    text-decoration: none;
+  }
+
+  header nav .nav-sections .nav-drop > ul > li > ul a:any-link {
+    min-height: 30px;
+    font-size: var(--body-font-size-xs);
+    font-weight: 400;
+  }
+
+  header nav .nav-sections .nav-drop > .nav-drop-toggle[aria-expanded='true'] + ul {
+    display: grid;
+  }
+
+  header nav .nav-sections .nav-drop > ul a:any-link:hover,
+  header nav .nav-sections .nav-drop > ul a:any-link:focus-visible {
+    color: var(--text-color);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   header nav .nav-utilities {
     grid-area: utilities;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 20px;
     margin: 0;
-    padding: 0 28px 0 0;
+    padding: 0 10px 0 0;
     list-style: none;
   }
 
@@ -460,7 +605,7 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
     min-height: 54px;
     padding: 2px 3px;
     color: #d7d7d7;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.1;
     text-decoration: none;
     white-space: nowrap;
@@ -473,16 +618,15 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   }
 
   header nav .nav-utilities .nav-utility-link svg {
-    display: block;
-    width: 21px;
-    height: 21px;
+    width: 24px;
+    height: 24px;
   }
 
   header nav .nav-utility-catalog .nav-utility-link:any-link {
     flex-direction: row;
     gap: 7px;
     min-width: 0;
-    min-height: 44px;
+    min-height: 46px;
     border-radius: 4px;
     padding: 0 12px;
     background-color: var(--accent-color);
@@ -498,8 +642,8 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
   }
 
   header nav .nav-utility-catalog .nav-utility-link svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
 
   header nav .nav-tools {
@@ -540,5 +684,12 @@ header nav .nav-tools .default-content-wrapper > p > a:focus-visible {
 
   header nav .nav-utility-catalog .nav-utility-label {
     font-size: 10px;
+  }
+
+  header nav .nav-sections .nav-drop > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px 20px;
+    padding-right: 24px;
+    padding-left: 24px;
   }
 }

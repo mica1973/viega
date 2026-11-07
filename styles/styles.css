@@ -59,9 +59,9 @@
 @media (width >= 900px) {
   :root {
     /* Header rows match the two-tier desktop navigation. */
-    --nav-height: 75px;
+    --nav-height: 72px;
     --nav-tools-height: 80px;
-    --header-height: 155px;
+    --header-height: 152px;
 
     /* body sizes */
     --body-font-size-m: 16px;
