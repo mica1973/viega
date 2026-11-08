@@ -118,6 +118,8 @@ h6 {
   font-weight: 400;
   line-height: 1.25;
   scroll-margin: 40px;
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }

@@ -59,6 +59,17 @@ function toggleAllNavSections(sections, expanded = false) {
     const label = button.dataset.menuLabel || 'Menü';
     button.setAttribute('aria-label', `${label} Untermenü ${isExpanded ? 'schließen' : 'öffnen'}`);
   });
+  sections.querySelectorAll('.nav-subdrop-toggle').forEach((button) => {
+    const label = button.dataset.menuLabel || 'Menü';
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', `${label} Untermenü öffnen`);
+  });
+  sections.querySelectorAll('.nav-subdrop').forEach((subSection) => {
+    subSection.parentElement.style.overflowY = '';
+    subSection.parentElement.querySelectorAll(':scope > li:not(.nav-subdrop)').forEach((item) => {
+      item.hidden = false;
+    });
+  });
 }
 
 /**
@@ -76,6 +87,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   else nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   // Keep every submenu collapsed when the mobile drawer opens or closes.
   toggleAllNavSections(navSections, false);
+  nav.querySelector('.nav-utilities')?.removeAttribute('hidden');
   button.setAttribute('aria-label', expanded ? 'Menü öffnen' : 'Menü schließen');
 
   // enable menu collapse on escape keypress
@@ -233,6 +245,7 @@ export default async function decorate(block) {
   }
 
   const navSections = nav.querySelector('.nav-sections');
+  const navUtilities = createUtilityNav();
   if (navSections) {
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection, index) => {
       const subList = navSection.querySelector(':scope > ul');
@@ -252,6 +265,76 @@ export default async function decorate(block) {
       toggle.setAttribute('aria-label', `${label} Untermenü öffnen`);
       subList.id = subList.id || `nav-submenu-${index + 1}`;
 
+      const backItem = document.createElement('li');
+      backItem.className = 'nav-submenu-back-item';
+      const backButton = document.createElement('button');
+      backButton.type = 'button';
+      backButton.className = 'nav-submenu-back';
+      backButton.setAttribute('aria-label', `Zurück zu ${label}`);
+      backButton.textContent = label;
+      backButton.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', `${label} Untermenü öffnen`);
+        toggle.focus();
+      });
+      backItem.append(backButton);
+      subList.prepend(backItem);
+
+      subList.querySelectorAll(':scope > li').forEach((subSection, subIndex) => {
+        const nestedList = subSection.querySelector(':scope > ul');
+        const nestedLabel = subSection.querySelector(':scope > p');
+        if (!nestedList || !nestedLabel || nestedLabel.querySelector(':scope > a')) return;
+
+        const nestedText = nestedLabel.textContent.trim() || `Untermenü ${subIndex + 1}`;
+        const nestedToggle = document.createElement('button');
+        nestedToggle.type = 'button';
+        nestedToggle.className = 'nav-subdrop-toggle';
+        nestedToggle.textContent = nestedText;
+        nestedToggle.dataset.menuLabel = nestedText;
+        nestedToggle.setAttribute('aria-expanded', 'false');
+        nestedToggle.setAttribute('aria-controls', nestedList.id || `nav-submenu-${index + 1}-${subIndex + 1}`);
+        nestedToggle.setAttribute('aria-label', `${nestedText} Untermenü öffnen`);
+        nestedList.id = nestedList.id || `nav-submenu-${index + 1}-${subIndex + 1}`;
+        subSection.classList.add('nav-subdrop');
+
+        const nestedBackItem = document.createElement('li');
+        nestedBackItem.className = 'nav-submenu-back-item';
+        const nestedBack = document.createElement('button');
+        nestedBack.type = 'button';
+        nestedBack.className = 'nav-submenu-back';
+        nestedBack.setAttribute('aria-label', `Zurück zu ${nestedText}`);
+        nestedBack.textContent = nestedText;
+        nestedBack.addEventListener('click', () => {
+          nestedToggle.setAttribute('aria-expanded', 'false');
+          nestedToggle.setAttribute('aria-label', `${nestedText} Untermenü öffnen`);
+          subList.style.overflowY = '';
+          navUtilities.hidden = false;
+          subList.querySelectorAll(':scope > li:not(.nav-subdrop)').forEach((item) => {
+            item.hidden = false;
+          });
+          nestedToggle.focus();
+        });
+        nestedBackItem.prepend(nestedBack);
+        nestedList.prepend(nestedBackItem);
+        nestedLabel.replaceWith(nestedToggle);
+
+        nestedToggle.addEventListener('click', () => {
+          const shouldExpandNested = nestedToggle.getAttribute('aria-expanded') !== 'true';
+          subList.querySelectorAll(':scope > li.nav-subdrop > .nav-subdrop-toggle').forEach((button) => {
+            const nestedToggleLabel = button.dataset.menuLabel || 'Menü';
+            button.setAttribute('aria-expanded', 'false');
+            button.setAttribute('aria-label', `${nestedToggleLabel} Untermenü öffnen`);
+          });
+          subList.querySelectorAll(':scope > li:not(.nav-subdrop)').forEach((item) => {
+            item.hidden = !isDesktop.matches && shouldExpandNested;
+          });
+          subList.style.overflowY = shouldExpandNested && !isDesktop.matches ? 'visible' : '';
+          navUtilities.hidden = !isDesktop.matches && shouldExpandNested;
+          nestedToggle.setAttribute('aria-expanded', `${shouldExpandNested}`);
+          nestedToggle.setAttribute('aria-label', `${nestedText} Untermenü ${shouldExpandNested ? 'schließen' : 'öffnen'}`);
+        });
+      });
+
       if (labelLink) {
         labelContainer.after(toggle);
       } else if (labelContainer) {
@@ -266,10 +349,8 @@ export default async function decorate(block) {
         const shouldExpand = toggle.getAttribute('aria-expanded') !== 'true';
         // A pointer click causes pointerenter first; don't immediately undo the hover-open state.
         if (isDesktop.matches && !shouldExpand && event.detail > 0 && navSection.matches(':hover')) return;
-        if (isDesktop.matches) {
-          toggleAllNavSections(navSections);
-          toggle.focus();
-        }
+        toggleAllNavSections(navSections);
+        toggle.focus();
         toggle.setAttribute('aria-expanded', `${shouldExpand}`);
         toggle.setAttribute('aria-label', `${label} Untermenü ${shouldExpand ? 'schließen' : 'öffnen'}`);
       });
@@ -310,6 +391,18 @@ export default async function decorate(block) {
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
+
+  const navMobilePanel = document.createElement('div');
+  navMobilePanel.className = 'nav-mobile-panel';
+  if (navSections) navMobilePanel.append(navSections);
+  navMobilePanel.append(navUtilities);
+  nav.append(navMobilePanel);
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'nav-backdrop';
+  backdrop.setAttribute('aria-hidden', 'true');
+  backdrop.addEventListener('click', () => toggleMenu(nav, navSections, false));
+  nav.prepend(backdrop);
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
@@ -317,7 +410,6 @@ export default async function decorate(block) {
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
-  nav.append(createUtilityNav());
   navWrapper.append(nav);
   block.append(navWrapper);
 }
