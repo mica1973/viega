@@ -1,5 +1,21 @@
 /* stylelint-disable max-line-length */
 @font-face {
+  font-family: 'M Ying HeiTM PRC for Viega W3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/viega-w3.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'M Ying HeiTM PRC for Viega W7';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/viega-w7.woff2') format('woff2');
+}
+
+@font-face {
   font-family: roboto-condensed;
   font-style: normal;
   font-weight: 700;

@@ -87,6 +87,164 @@
   transform: rotate(-45deg);
 }
 
+/* stylelint-disable no-descending-specificity */
+
+/* Pressverbindersysteme page: mirror Viega's image-led application and reference tiles. */
+.cards.pvs-applications > ul > li {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark-color);
+}
+
+.cards-wrapper:has(> .cards.pvs-applications) {
+  max-width: 1050px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.cards.pvs-applications .cards-card-image {
+  height: auto;
+}
+
+.cards.pvs-applications > ul > li img:not([src*='.svg']) {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cards.pvs-applications .cards-card-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  background: #e1e7e7;
+  color: var(--text-color);
+  opacity: 0;
+  text-align: center;
+  transition: opacity 180ms ease-in-out;
+}
+
+.cards.pvs-applications .cards-card-body h3 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.cards.pvs-applications .cards-card-body p {
+  margin: 0 0 14px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+}
+
+.cards.pvs-applications .cards-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cards.pvs-applications .cards-card-body p:last-child a:any-link {
+  color: var(--text-color);
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-weight: 400;
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.cards.pvs-applications > ul > li:hover .cards-card-body,
+.cards.pvs-applications > ul > li:focus-within .cards-card-body {
+  opacity: 1;
+}
+
+.cards.pvs-applications .pvs-application-label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: var(--background-color);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity 180ms ease-in-out;
+}
+
+.cards.pvs-applications > ul > li:hover .pvs-application-label,
+.cards.pvs-applications > ul > li:focus-within .pvs-application-label {
+  opacity: 0;
+}
+
+.cards.pvs-references > ul > li {
+  height: 100%;
+}
+
+.cards.pvs-references > ul > li img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cards.pvs-references .cards-card-body {
+  height: calc(100% - 1px);
+  padding: 18px 20px 24px;
+  background: var(--light-color);
+}
+
+.cards.pvs-references .cards-card-body h3 a:any-link {
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (width >= 900px) {
+  main.pvs-page > .pvs-applications-section > .cards-wrapper:has(> .cards.pvs-applications) {
+    max-width: 1044px;
+    margin: 20px 0 0;
+  }
+
+  main.pvs-page > .pvs-references-section > .cards-wrapper:has(> .cards.pvs-references) {
+    max-width: 1400px;
+    margin: 20px 0 0;
+  }
+
+  .cards.pvs-applications > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .cards.pvs-references > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+@media (width >= 600px) and (width < 900px) {
+  .cards.pvs-references > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (width < 900px) {
+  .cards-wrapper:has(> .cards.pvs-applications) {
+    max-width: none;
+  }
+
+  .cards.pvs-applications > ul > li img:not([src*='.svg']) {
+    aspect-ratio: 1.75;
+  }
+
+  .cards.pvs-applications > ul {
+    row-gap: 30px;
+  }
+}
+/* stylelint-enable no-descending-specificity */
+
 @media (width >= 600px) {
   .cards > ul:has(> li:nth-child(2)) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
