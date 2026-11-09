@@ -1,0 +1,440 @@
+.cards > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 60px;
+}
+
+.cards > ul > li {
+  border: 0;
+  background-color: var(--light-color);
+}
+
+.cards .cards-card-body {
+  padding: 20px 64px 20px 20px;
+}
+
+.cards .cards-card-image {
+  line-height: 0;
+}
+
+.cards > ul > li img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cards > ul > li:has(.cards-card-image img[src*='.svg']) {
+  padding: 0;
+}
+
+.cards > ul > li:has(.cards-card-image img[src*='.svg']) .cards-card-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards > ul > li:has(.cards-card-image img[src*='.svg']) .cards-card-image picture {
+  display: block;
+  width: 100%;
+}
+
+.cards > ul > li:has(.cards-card-image img[src*='.svg']) img {
+  box-sizing: border-box;
+  width: 66%;
+  height: 198px;
+  margin: 0 auto;
+  padding: 20px;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+.cards > ul > li:has(.cards-card-image img[src*='.svg']) .cards-card-body {
+  padding: 20px 64px 20px 20px;
+}
+
+.cards .cards-card-body h2,
+.cards .cards-card-body h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: var(--heading-font-size-l);
+  line-height: 1.3;
+}
+
+.cards .cards-card-body p {
+  margin: 0;
+}
+
+.cards .cards-card-body p:last-child {
+  margin-top: 4px;
+}
+
+.cards .cards-card-body p:last-child a:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.cards .cards-card-body p:last-child a::after {
+  width: 8px;
+  height: 8px;
+  border: solid currentcolor;
+  border-width: 0 2px 2px 0;
+  content: '';
+  transform: rotate(-45deg);
+}
+
+/* stylelint-disable no-descending-specificity */
+
+/* Pressverbindersysteme page: mirror Viega's image-led application and reference tiles. */
+.cards.pvs-applications > ul > li {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark-color);
+}
+
+.cards-wrapper:has(> .cards.pvs-applications) {
+  max-width: 1050px;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.cards.pvs-applications .cards-card-image {
+  height: auto;
+}
+
+.cards.pvs-applications > ul > li img:not([src*='.svg']) {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cards.pvs-applications .cards-card-body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 24px;
+  background: #e1e7e7;
+  color: var(--text-color);
+  opacity: 0;
+  text-align: center;
+  transition: opacity 180ms ease-in-out;
+}
+
+.cards.pvs-applications .cards-card-body h3 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.cards.pvs-applications .cards-card-body p {
+  margin: 0 0 14px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+}
+
+.cards.pvs-applications .cards-card-body p:last-child {
+  margin-bottom: 0;
+}
+
+.cards.pvs-applications .cards-card-body p:last-child a:any-link {
+  color: var(--text-color);
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-weight: 400;
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.cards.pvs-applications > ul > li:hover .cards-card-body,
+.cards.pvs-applications > ul > li:focus-within .cards-card-body {
+  opacity: 1;
+}
+
+.cards.pvs-applications .pvs-application-label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  color: var(--background-color);
+  font-size: 30px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  transition: opacity 180ms ease-in-out;
+}
+
+.cards.pvs-applications > ul > li:hover .pvs-application-label,
+.cards.pvs-applications > ul > li:focus-within .pvs-application-label {
+  opacity: 0;
+}
+
+.cards.pvs-references > ul > li {
+  height: 100%;
+}
+
+.cards.pvs-references > ul > li img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cards.pvs-references .cards-card-body {
+  height: calc(100% - 1px);
+  padding: 18px 20px 24px;
+  background: var(--light-color);
+}
+
+.cards.pvs-references .cards-card-body h3 a:any-link {
+  text-decoration-color: var(--accent-color);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+@media (width >= 900px) {
+  main.pvs-page > .pvs-applications-section > .cards-wrapper:has(> .cards.pvs-applications) {
+    max-width: 1044px;
+    margin: 20px 0 0;
+  }
+
+  main.pvs-page > .pvs-references-section > .cards-wrapper:has(> .cards.pvs-references) {
+    max-width: 1400px;
+    margin: 20px 0 0;
+  }
+
+  .cards.pvs-applications > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+
+  .cards.pvs-references > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+@media (width >= 600px) and (width < 900px) {
+  .cards.pvs-references > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (width < 900px) {
+  .cards-wrapper:has(> .cards.pvs-applications) {
+    max-width: none;
+  }
+
+  .cards.pvs-applications > ul > li img:not([src*='.svg']) {
+    aspect-ratio: 1.75;
+  }
+
+  .cards.pvs-applications > ul {
+    row-gap: 30px;
+  }
+}
+
+/* Product overview cards mirror Viega's two-column, image-led teasers. */
+body.product-overview .cards.product-overview > ul {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+}
+
+.cards.product-overview > ul > li {
+  position: relative;
+  display: flex;
+  min-height: 200px;
+  overflow: hidden;
+  align-items: stretch;
+  background-color: #e1e7e7;
+}
+
+.cards.product-overview .cards-card-image {
+  flex: 0 0 33.333%;
+  height: 200px;
+  line-height: 0;
+}
+
+.cards.product-overview .cards-card-image p,
+.cards.product-overview .cards-card-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.cards.product-overview .cards-card-image img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.cards.product-overview .cards-card-body {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 64px 20px 20px;
+}
+
+.cards.product-overview .cards-card-body h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.cards.product-overview .cards-card-body h3 a:any-link {
+  color: #111;
+  text-decoration: none;
+}
+
+.cards.product-overview .cards-card-body h3 a::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: '';
+}
+
+.cards.product-overview .cards-card-body p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.cards.product-overview > ul > li::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: 22px;
+  width: 8px;
+  height: 8px;
+  border: solid #777;
+  border-width: 0 1px 1px 0;
+  content: '';
+  pointer-events: none;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.cards.product-overview > ul > li:focus-within {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+@media (width >= 900px) {
+  body.product-overview .cards.product-overview > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width < 900px) {
+  .cards.product-overview > ul > li {
+    min-height: 352px;
+    flex-direction: column;
+  }
+
+  .cards.product-overview .cards-card-image {
+    display: flex;
+    width: 100%;
+    height: 220px;
+    flex: 0 0 220px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .cards.product-overview .cards-card-image p {
+    width: 66%;
+    height: 198px;
+    margin: 20px auto 0;
+  }
+
+  .cards.product-overview .cards-card-image picture {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cards.product-overview .cards-card-body {
+    min-height: 132px;
+  }
+
+  .cards.product-overview .cards-card-body h3 {
+    font-size: 20px;
+  }
+
+  .cards.product-overview .cards-card-body p {
+    font-size: 14px;
+  }
+}
+/* stylelint-enable no-descending-specificity */
+
+@media (width >= 600px) {
+  .cards > ul:has(> li:nth-child(2)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards > ul > li img:not([src*='.svg']) {
+    aspect-ratio: 1.16 / 1;
+  }
+
+  .cards > ul:has(> li:nth-child(3)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards > ul:has(> li:nth-child(2)) {
+    gap: 30px;
+  }
+
+  .cards .cards-card-body {
+    padding: 20px 64px 20px 20px;
+  }
+
+  .cards > ul > li:has(.cards-card-image img[src*='.svg']) {
+    display: flex;
+    align-items: stretch;
+    height: 200px;
+    min-height: 200px;
+  }
+
+  .cards > ul > li:has(.cards-card-image img[src*='.svg']) .cards-card-image {
+    flex: 0 0 33%;
+    height: 200px;
+  }
+
+  .cards > ul > li:has(.cards-card-image img[src*='.svg']) img {
+    width: 100%;
+    height: 198px;
+    margin: 0;
+    padding: 10%;
+  }
+
+  .cards > ul > li:has(.cards-card-image img[src*='.svg']) .cards-card-body {
+    padding: 20px 64px 20px 20px;
+  }
+}
+
+@media (width < 900px) {
+  .cards .cards-card-body h2,
+  .cards .cards-card-body h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
