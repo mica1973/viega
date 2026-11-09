@@ -392,3 +392,1093 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+/* stylelint-disable no-descending-specificity */
+
+/* Page-specific composition of the imported Pressverbindersysteme content. */
+main.pvs-page {
+  --body-font-family: 'M Ying HeiTM PRC for Viega W3', helvetica, roboto, arial, sans-serif;
+  --heading-font-family: 'M Ying HeiTM PRC for Viega W3', helvetica, roboto, arial, sans-serif;
+
+  font-family: var(--body-font-family);
+  letter-spacing: 0.025em;
+}
+
+main.pvs-page strong,
+main.pvs-page b {
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-weight: 400;
+}
+
+main.pvs-page > .section {
+  margin: 72px 0;
+}
+
+main.pvs-page > .pvs-title-section {
+  margin: 0;
+}
+
+main.pvs-page > .pvs-title-section > .default-content-wrapper {
+  padding-top: 45px;
+}
+
+main.pvs-page .pvs-breadcrumb {
+  margin: 0 0 84px;
+  color: #777;
+  font-size: var(--body-font-size-xs);
+}
+
+main.pvs-page .pvs-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main.pvs-page .pvs-breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+
+main.pvs-page .pvs-breadcrumb li + li::before {
+  width: 7px;
+  height: 7px;
+  border: solid #a5a5a5;
+  border-width: 1px 1px 0 0;
+  content: '';
+  transform: rotate(45deg);
+}
+
+main.pvs-page .pvs-breadcrumb a:any-link {
+  color: #777;
+  text-decoration: none;
+}
+
+main.pvs-page .pvs-breadcrumb a:any-link:hover,
+main.pvs-page .pvs-breadcrumb a:any-link:focus-visible {
+  color: var(--text-color);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-color);
+  text-underline-offset: 4px;
+}
+
+main.pvs-page .pvs-title-section h1 {
+  max-width: none;
+  margin: 0 0 20px;
+  border-bottom: 1px solid #d2d5d5;
+  padding: 0 0 14px;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  line-height: 1.2;
+  hyphens: auto;
+  overflow-wrap: normal;
+}
+
+main.pvs-page > .pvs-intro-section {
+  margin: 16px 0 80px;
+}
+
+main.pvs-page > .pvs-intro-section p {
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+main.pvs-page > .pvs-overview-section {
+  margin: 0 0 80px;
+}
+
+main.pvs-page > .pvs-overview-section > .presshotspots-wrapper {
+  max-width: 1440px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+main.pvs-page > .pvs-anchor-nav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 20;
+  margin: 80px 0 0;
+  border-top: 1px solid #d2d5d5;
+  border-bottom: 1px solid #d2d5d5;
+  background: var(--background-color);
+}
+
+main.pvs-page > .pvs-anchor-nav > .default-content-wrapper {
+  max-width: 1440px;
+  padding: 0 20px;
+}
+
+main.pvs-page > .pvs-anchor-nav ul {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(16px, 3vw, 40px);
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+main.pvs-page > .pvs-anchor-nav ul::-webkit-scrollbar {
+  display: none;
+}
+
+main.pvs-page > .pvs-anchor-nav li {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+main.pvs-page > .pvs-anchor-nav a:any-link {
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+  padding: 0 0 1px;
+  color: #777;
+  font-size: var(--body-font-size-s);
+  text-decoration: none;
+}
+
+main.pvs-page > .pvs-anchor-nav a:any-link:hover,
+main.pvs-page > .pvs-anchor-nav a:any-link:focus-visible {
+  border-bottom-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+main.pvs-page > .pvs-brochure-section {
+  margin: 76px 0 0;
+}
+
+main.pvs-page .pvs-sticky-brochure {
+  position: fixed;
+  top: 72%;
+  right: 0;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+  min-width: 265px;
+  min-height: 60px;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px 0 0 4px;
+  padding: 12px 16px 12px 20px;
+  background: var(--accent-color);
+  color: var(--text-color);
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.2;
+  text-decoration: none;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity 160ms ease-in-out, visibility 160ms ease-in-out;
+  visibility: hidden;
+}
+
+main.pvs-page .pvs-sticky-brochure.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+main.pvs-page .pvs-sticky-brochure:hover,
+main.pvs-page .pvs-sticky-brochure:focus-visible {
+  background: #fff;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+main.pvs-page .pvs-sticky-brochure-icon {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 18px;
+  height: 24px;
+  border: 1px solid currentcolor;
+  box-sizing: border-box;
+}
+
+main.pvs-page .pvs-sticky-brochure-icon::before {
+  position: absolute;
+  right: -1px;
+  top: -1px;
+  width: 7px;
+  height: 7px;
+  border: solid currentcolor;
+  border-width: 0 0 1px 1px;
+  background: var(--accent-color);
+  content: '';
+}
+
+main.pvs-page .pvs-sticky-brochure-icon::after {
+  position: absolute;
+  right: 2px;
+  bottom: 4px;
+  left: 2px;
+  height: 5px;
+  border-top: 1px solid currentcolor;
+  content: 'PDF';
+  font-family: Arial, sans-serif;
+  font-size: 5px;
+  line-height: 5px;
+  text-align: center;
+}
+
+main.pvs-page > .pvs-applications-heading {
+  margin: 80px 0 20px;
+}
+
+main.pvs-page > .pvs-applications-section {
+  margin: 20px 0 72px;
+}
+
+main.pvs-page h2[id^='pvs-'] {
+  scroll-margin-top: calc(var(--header-height) + 64px);
+}
+
+main.pvs-page > .pvs-brochure-section > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: minmax(220px, 33.2%) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  column-gap: 2px;
+  min-height: 200px;
+  box-sizing: border-box;
+  padding: 0;
+  background: var(--light-color);
+}
+
+main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:first-child {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  margin: 0;
+  line-height: 0;
+}
+
+main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:first-child img {
+  display: block;
+  width: 100%;
+  height: 198px;
+  max-height: 198px;
+  object-fit: cover;
+}
+
+main.pvs-page > .pvs-brochure-section > .default-content-wrapper > h3 {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  margin: 20px 64px 0 20px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:last-child {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 20px 64px 0 20px;
+}
+
+main.pvs-page > .pvs-applications-heading,
+main.pvs-page > .pvs-function-heading,
+main.pvs-page > .pvs-tools-heading,
+main.pvs-page > .pvs-features-heading,
+main.pvs-page > .pvs-faq-heading,
+main.pvs-page > .pvs-benefits-heading,
+main.pvs-page > .pvs-references-heading,
+main.pvs-page > .pvs-contact-heading {
+  margin-bottom: 20px;
+}
+
+main.pvs-page > .pvs-applications-heading h2,
+main.pvs-page > .pvs-function-heading h2,
+main.pvs-page > .pvs-tools-heading h2,
+main.pvs-page > .pvs-features-heading h2,
+main.pvs-page > .pvs-faq-heading h2,
+main.pvs-page > .pvs-benefits-heading h2,
+main.pvs-page > .pvs-references-heading h2,
+main.pvs-page > .pvs-contact-heading h2 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.3;
+}
+
+main.pvs-page > .pvs-function-heading {
+  margin-bottom: 20px;
+}
+
+main.pvs-page > .pvs-features-heading {
+  margin-top: 88px;
+  margin-bottom: 20px;
+}
+
+main.pvs-page > .pvs-features-content {
+  margin: 0 0 80px;
+}
+
+main.pvs-page > .pvs-features-content > .default-content-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto auto auto;
+  gap: 0 30px;
+  align-items: start;
+  align-content: start;
+  min-height: 466px;
+}
+
+main.pvs-page .pvs-feature-heading {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+main.pvs-page .pvs-features-content .pvs-feature-copy-1,
+main.pvs-page .pvs-features-content .pvs-feature-copy-2,
+main.pvs-page .pvs-features-content .pvs-feature-copy-3 {
+  grid-column: 1;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+main.pvs-page .pvs-features-content .pvs-feature-copy-1 {
+  grid-row: 2;
+}
+
+main.pvs-page .pvs-features-content .pvs-feature-copy-2 {
+  grid-row: 3;
+}
+
+main.pvs-page .pvs-features-content .pvs-feature-copy-3 {
+  grid-row: 4;
+  margin-bottom: 0;
+}
+
+/* The source presents the two tool/product highlights as alternating two-column rows. */
+main.pvs-page > .pvs-tools-heading {
+  margin-bottom: 20px;
+}
+
+main.pvs-page > .pvs-product-feature {
+  margin: 0;
+}
+
+main.pvs-page > .pvs-product-feature-systemarmaturen {
+  margin-top: 80px;
+}
+
+main.pvs-page > .pvs-product-feature > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto auto auto;
+  column-gap: 30px;
+  align-items: start;
+  align-content: start;
+  min-height: 334px;
+}
+
+main.pvs-page .pvs-product-feature-heading {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 30px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+main.pvs-page .pvs-product-feature-copy {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  line-height: 1.6;
+}
+
+main.pvs-page .pvs-product-feature-link {
+  display: flex;
+  grid-column: 1;
+  grid-row: 3;
+  justify-content: flex-end;
+  margin: 30px 0 14px;
+}
+
+main.pvs-page .pvs-product-feature-link a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-sizing: border-box;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  padding: 12.6px 14.9px;
+  background: var(--accent-color);
+  color: var(--text-color);
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-size: 14.4px;
+  line-height: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+main.pvs-page .pvs-product-feature-link a:any-link::after {
+  width: 8px;
+  height: 8px;
+  border: solid currentcolor;
+  border-width: 1px 1px 0 0;
+  content: '';
+  transform: rotate(45deg);
+}
+
+main.pvs-page .pvs-product-feature-image {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  margin: 0;
+  line-height: 0;
+}
+
+main.pvs-page .pvs-product-feature-image picture,
+main.pvs-page .pvs-product-feature-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+main.pvs-page > .pvs-function-content {
+  margin: 0 0 72px;
+}
+
+main.pvs-page > .pvs-function-content > .default-content-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: max-content max-content max-content;
+  gap: 0 30px;
+  align-items: start;
+  min-height: 385px;
+}
+
+main.pvs-page > .pvs-function-content > .default-content-wrapper > p:first-child {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+main.pvs-page > .pvs-function-content ol {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0 0 16px 20px;
+  padding: 0;
+  list-style: decimal;
+  line-height: 1.6;
+}
+
+main.pvs-page > .pvs-function-content ol li {
+  margin: 0;
+  padding: 0;
+}
+
+main.pvs-page > .pvs-function-content ol li p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+main.pvs-page > .pvs-function-content > .default-content-wrapper > p:nth-of-type(2) {
+  grid-column: 1;
+  grid-row: 3;
+  margin: 0;
+  line-height: 1.6;
+}
+
+main.pvs-page .pvs-function-media,
+main.pvs-page .pvs-feature-media {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  overflow: hidden;
+  width: calc(50% - 35px);
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  background: var(--dark-color);
+  color: var(--background-color);
+}
+
+main.pvs-page .pvs-feature-media {
+  top: 51px;
+}
+
+main.pvs-page .pvs-function-media picture,
+main.pvs-page .pvs-function-media img,
+main.pvs-page .pvs-feature-media picture,
+main.pvs-page .pvs-feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+main.pvs-page .pvs-function-media img,
+main.pvs-page .pvs-feature-media img {
+  object-fit: cover;
+  filter: brightness(0.42) saturate(0.7);
+}
+
+main.pvs-page .pvs-function-media figcaption,
+main.pvs-page .pvs-feature-media figcaption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px 24px 24px;
+  background: linear-gradient(transparent 28%, rgb(0 0 0 / 78%));
+}
+
+main.pvs-page .pvs-function-media figcaption h4,
+main.pvs-page .pvs-feature-media figcaption h4 {
+  margin: 0 0 8px;
+  color: var(--background-color);
+  font-size: var(--heading-font-size-s);
+}
+
+main.pvs-page .pvs-function-media figcaption p,
+main.pvs-page .pvs-feature-media figcaption p {
+  margin: 0 0 8px;
+  color: var(--background-color);
+  font-size: var(--body-font-size-xs);
+  line-height: 1.4;
+}
+
+main.pvs-page .pvs-function-media figcaption .pvs-function-unavailable {
+  margin: 0 0 8px;
+  color: var(--background-color);
+  font-size: var(--body-font-size-xs);
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+main.pvs-page .pvs-function-media figcaption a:any-link,
+main.pvs-page .pvs-feature-media figcaption a:any-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 12px 24px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: 'M Ying HeiTM PRC for Viega W7', helvetica, arial, sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  transform: translate(-50%, -50%);
+}
+
+main.pvs-page > .pvs-faq-section {
+  margin: 0 0 80px;
+}
+
+main.pvs-page > .pvs-faq-section > .default-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+
+main.pvs-page .pvs-faq-list {
+  border-top: 1px solid #d2d5d5;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main.pvs-page .pvs-faq-item {
+  border-bottom: 1px solid #d2d5d5;
+  padding: 0;
+}
+
+main.pvs-page .pvs-faq-item h3 {
+  margin: 0;
+}
+
+main.pvs-page .pvs-faq-trigger {
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 20.5px 34px 20.5px 10px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: 0.4px;
+  hyphens: manual;
+  overflow-wrap: normal;
+  text-align: left;
+  cursor: pointer;
+}
+
+main.pvs-page .pvs-faq-trigger::after {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  border: solid #777;
+  border-width: 0 1px 1px 0;
+  content: '';
+  transform: translateY(-70%) rotate(45deg);
+}
+
+main.pvs-page .pvs-faq-trigger[aria-expanded='true']::after {
+  transform: translateY(-30%) rotate(225deg);
+}
+
+main.pvs-page .pvs-faq-answer {
+  padding: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+main.pvs-page .pvs-faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+main.pvs-page .pvs-benefits-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(255px, auto));
+  gap: 30px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+main.pvs-page .pvs-benefit-card {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 255px;
+  padding: 46px 15px 30px 78px;
+  background-color: #eff2f2;
+}
+
+main.pvs-page .pvs-benefit-icon {
+  position: absolute;
+  top: calc(50% - 24px);
+  left: 15px;
+  width: 48px;
+  height: 48px;
+  color: var(--text-color);
+}
+
+main.pvs-page .pvs-benefit-card h3 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+main.pvs-page .pvs-benefit-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+main.pvs-page > .pvs-contact-content > .default-content-wrapper > p:first-child {
+  float: right;
+  width: min(42%, 520px);
+  margin: 0 0 24px 32px;
+}
+
+main.pvs-page > .pvs-contact-content > .default-content-wrapper > p:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (width < 900px) {
+  main.pvs-page > .section {
+    margin: 56px 0;
+  }
+
+  main.pvs-page > .pvs-title-section {
+    margin: 0;
+  }
+
+  main.pvs-page > .pvs-title-section > .default-content-wrapper {
+    padding-top: 45px;
+  }
+
+  main.pvs-page .pvs-breadcrumb {
+    margin-bottom: 51px;
+  }
+
+  main.pvs-page .pvs-breadcrumb ol {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  main.pvs-page .pvs-breadcrumb li:nth-child(2) a:any-link {
+    font-size: 0;
+  }
+
+  main.pvs-page .pvs-breadcrumb li:nth-child(2) a:any-link::after {
+    content: '…';
+    font-size: var(--body-font-size-xs);
+  }
+
+  main.pvs-page > .pvs-intro-section {
+    margin: 20px 0 50px;
+  }
+
+  main.pvs-page > .pvs-overview-section {
+    margin-top: 49px;
+    margin-bottom: 0;
+  }
+
+  main.pvs-page .pvs-title-section h1 {
+    margin-bottom: 20px;
+    border-bottom: 0;
+    padding-bottom: 0;
+    font-size: 1.875rem;
+    line-height: 1.3;
+  }
+
+  main.pvs-page .pvs-title-section h1::after {
+    display: block;
+    margin-top: 10px;
+    border-bottom: 1px solid #d2d5d5;
+    content: '';
+  }
+
+  main.pvs-page > .pvs-applications-heading h2,
+  main.pvs-page > .pvs-function-heading h2,
+  main.pvs-page > .pvs-tools-heading h2,
+  main.pvs-page > .pvs-features-heading h2,
+  main.pvs-page > .pvs-faq-heading h2,
+  main.pvs-page > .pvs-benefits-heading h2,
+  main.pvs-page > .pvs-references-heading h2,
+  main.pvs-page > .pvs-contact-heading h2 {
+    font-size: 1.625rem;
+    line-height: 1.3;
+  }
+
+  main.pvs-page > .pvs-anchor-nav {
+    top: 0;
+    margin: 50px 0 0;
+  }
+
+  main.pvs-page > .pvs-anchor-nav ul {
+    gap: 20px;
+    min-height: 44px;
+  }
+
+  main.pvs-page > .pvs-brochure-section {
+    margin: 50px 0;
+  }
+
+  main.pvs-page .pvs-sticky-brochure {
+    width: 50px;
+    min-width: 0;
+    min-height: 204px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 8px;
+    font-size: 16px;
+  }
+
+  main.pvs-page .pvs-sticky-brochure-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  main.pvs-page .pvs-sticky-brochure-icon {
+    order: -1;
+  }
+
+  main.pvs-page > .pvs-brochure-section > .default-content-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    box-sizing: border-box;
+    max-width: 350px;
+    min-height: 376px;
+    margin: 0 auto;
+    padding: 21px 0 20px;
+  }
+
+  main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:first-child {
+    grid-column: 1;
+    grid-row: 1;
+    width: 231px;
+    height: 198px;
+    margin: 0 auto;
+  }
+
+  main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:first-child img {
+    width: 231px;
+    height: 198px;
+    max-height: 198px;
+    object-fit: cover;
+  }
+
+  main.pvs-page > .pvs-brochure-section > .default-content-wrapper > h3 {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 266px;
+    margin: 21px 20px 0;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  main.pvs-page > .pvs-brochure-section > .default-content-wrapper > p:last-child {
+    grid-column: 1;
+    grid-row: 3;
+    max-width: 266px;
+    margin: 20px 20px 0;
+  }
+
+  main.pvs-page > .pvs-applications-heading {
+    margin: 50px 0 20px;
+  }
+
+  main.pvs-page > .pvs-applications-section {
+    margin-top: 21px;
+    margin-bottom: 50px;
+  }
+
+  main.pvs-page > .pvs-function-heading {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
+  main.pvs-page > .pvs-features-heading {
+    margin-top: 17px;
+    margin-bottom: 20px;
+  }
+
+  main.pvs-page > .pvs-features-content {
+    margin: 0 0 56px;
+  }
+
+  main.pvs-page > .pvs-features-content > .default-content-wrapper {
+    position: static;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto auto;
+    gap: 0;
+    min-height: 0;
+  }
+
+  main.pvs-page .pvs-feature-heading,
+  main.pvs-page .pvs-features-content .pvs-feature-copy-1,
+  main.pvs-page .pvs-features-content .pvs-feature-copy-2,
+  main.pvs-page .pvs-features-content .pvs-feature-copy-3,
+  main.pvs-page .pvs-feature-media {
+    grid-column: 1;
+  }
+
+  main.pvs-page .pvs-feature-heading {
+    grid-row: 1;
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  main.pvs-page .pvs-features-content .pvs-feature-copy-1 {
+    grid-row: 2;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  main.pvs-page .pvs-features-content .pvs-feature-copy-2 {
+    grid-row: 3;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  main.pvs-page .pvs-features-content .pvs-feature-copy-3 {
+    grid-row: 4;
+    margin-bottom: 0;
+    line-height: 1.6;
+  }
+
+  main.pvs-page .pvs-feature-media {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    grid-row: 5;
+    margin: 60px 0 24px;
+  }
+
+  main.pvs-page > .pvs-tools-heading {
+    margin-bottom: 20px;
+  }
+
+  main.pvs-page > .pvs-product-feature {
+    margin: 0 0 50px;
+  }
+
+  main.pvs-page > .pvs-product-feature-systemarmaturen {
+    margin-top: 0;
+  }
+
+  main.pvs-page > .pvs-product-feature > .default-content-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    min-height: 0;
+  }
+
+  main.pvs-page .pvs-product-feature-heading,
+  main.pvs-page .pvs-product-feature-copy,
+  main.pvs-page .pvs-product-feature-link,
+  main.pvs-page .pvs-product-feature-image {
+    grid-column: 1;
+  }
+
+  main.pvs-page .pvs-product-feature-heading {
+    grid-row: 1;
+    margin-bottom: 30px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  main.pvs-page .pvs-product-feature-copy {
+    grid-row: 2;
+  }
+
+  main.pvs-page .pvs-product-feature-link {
+    grid-row: 3;
+  }
+
+  main.pvs-page .pvs-product-feature-image {
+    grid-row: 4;
+    margin: 33px 0 30px;
+  }
+
+  main.pvs-page > .pvs-function-content {
+    margin-top: 0;
+    margin-bottom: 49px;
+  }
+
+  main.pvs-page > .pvs-function-content > .default-content-wrapper {
+    position: static;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    min-height: 0;
+  }
+
+  main.pvs-page > .pvs-function-content > .default-content-wrapper > p:first-child,
+  main.pvs-page > .pvs-function-content ol,
+  main.pvs-page > .pvs-function-content > .default-content-wrapper > p:nth-of-type(2) {
+    grid-column: 1;
+  }
+
+  main.pvs-page > .pvs-function-content > .default-content-wrapper > p:first-child {
+    grid-row: 1;
+  }
+
+  main.pvs-page > .pvs-function-content ol {
+    grid-row: 2;
+  }
+
+  main.pvs-page > .pvs-function-content > .default-content-wrapper > p:nth-of-type(2) {
+    grid-row: 3;
+  }
+
+  main.pvs-page .pvs-function-media {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    grid-column: 1;
+    grid-row: 4;
+    margin-top: 60px;
+  }
+
+  main.pvs-page .pvs-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+    gap: 24px;
+  }
+
+  main.pvs-page > .pvs-faq-section > .default-content-wrapper {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  main.pvs-page > .pvs-faq-heading {
+    margin: 56px 0 20px;
+  }
+
+  main.pvs-page > .pvs-faq-section {
+    margin: 0 0 50px;
+  }
+
+  main.pvs-page > .pvs-benefits-heading {
+    margin-top: 50px;
+  }
+
+  main.pvs-page .pvs-faq-list + .pvs-faq-list {
+    margin-top: 30px;
+    border-top: 0;
+  }
+
+  main.pvs-page > .pvs-contact-content > .default-content-wrapper > p:first-child {
+    float: none;
+    width: 100%;
+    margin: 0 0 20px;
+  }
+}
+
+@media (width < 600px) {
+  main.pvs-page > .pvs-anchor-nav > .default-content-wrapper {
+    padding: 0 20px;
+  }
+
+  main.pvs-page .pvs-benefits-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    grid-auto-flow: row;
+    gap: 12px;
+  }
+
+  main.pvs-page .pvs-benefit-card {
+    min-height: 210px;
+    padding: 98px 15px 30px 20px;
+  }
+
+  main.pvs-page .pvs-benefit-card h3 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  main.pvs-page .pvs-faq-trigger {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  main.pvs-page .pvs-benefit-icon {
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (width >= 900px) {
+  body:has(main.pvs-page) .header-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+}
+/* stylelint-enable no-descending-specificity */
